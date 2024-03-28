@@ -1,10 +1,3 @@
-# TODO: Task Manager
+# Apollo Mern Mongo
 
-## Description
-
-## Table of Contents
-
-## Usage
-
-## Collaborators
-
+Boilerplate code to setup a MERN Apollo Server/Client Application using a Mongo database
