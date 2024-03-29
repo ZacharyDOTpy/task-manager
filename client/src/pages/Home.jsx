@@ -9,7 +9,7 @@ function Home() {
   const users = data?.users || [];
 
   if (error) {
-    return <ErrorMessage message="An error occurred. Please try again later." />;
+    throw Error(error);
   }
 
   if (loading) {
