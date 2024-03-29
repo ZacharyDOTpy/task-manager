@@ -8,16 +8,12 @@ function Home() {
 
   const users = data?.users || [];
 
-  const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   if (error) {
     return <ErrorMessage message="An error occurred. Please try again later." />;
   }
 
   if (loading) {
-    return <LoadingSpinner />;
+    return <h2>Loading…</h2>;
   }
   
 
