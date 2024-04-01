@@ -1,5 +1,5 @@
 const { GraphQLError } = require('graphql');
-const { User } = require('../models');
+const { User, Task, TaskList } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
