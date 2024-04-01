@@ -16,6 +16,12 @@ const resolvers = {
       }
       throw new GraphQLError('You need to be logged in!');
     },
+    tasks: async () => {
+      return Task.find();
+    },
+    task: async (_, { id }) => {
+      return Task.findById(id);
+    },
   },
 
   Mutation: {
@@ -23,6 +29,14 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
+    },
+    addTask: (_, { input }) => {
+      const newTask = new Task(input);
+      return newTask.save();
+    },
+    updateTask: (_, { id, input }) => {
+      const updatedTask = Task.findByIdAndUpdate(id, input, { new: true });
+      return updatedTask;
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
