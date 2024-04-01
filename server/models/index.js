@@ -1,33 +1,34 @@
-const User = require("./User");
-const Task = require("./Task");
-const TaskList = require("./TaskList");
+const mongoose = require("mongoose");
 
-User.hasMany(Task, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
+const UserSchema = new mongoose.Schema({
+  username: String,
+  email: String,
+  password: String,
+
 });
 
-Task.belongsTo(User, {
-  foreignKey: "user_id",
+const TaskSchema = new mongoose.Schema({
+  title: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  taskList: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'TaskList'
+  }
 });
 
-TaskList.hasMany(Task, {
-  foreignKey: "task_list_id",
-  onDelete: "CASCADE",
+const TaskListSchema = new mongoose.Schema({
+  name: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
-Task.belongsTo(TaskList, {
-  foreignKey: "task_list_id",
-});
-
-TaskList.belongsTo(User, {
-  foreignKey: "user_id",
-});
-
-User.hasMany(TaskList, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
+const User = mongoose.model("User", UserSchema);
+const Task = mongoose.model("Task", TaskSchema);
+const TaskList = mongoose.model("TaskList", TaskListSchema);
 
 module.exports = { User, Task, TaskList };
-
