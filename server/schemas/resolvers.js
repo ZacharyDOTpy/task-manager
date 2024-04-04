@@ -33,10 +33,11 @@ const resolvers = {
     },
     addTask: async (_, { input }) => {
       const task = await Task.create(input);
-
-      await Task.findOneAndUpdate(
-        { User: User._id },
-        { $push: { tasks: Task._id } },
+      console.log(task._id);
+      console.log(task)
+      await User.findOneAndUpdate(
+        { _id: input.userId },
+        { $addToSet: { tasks: [{_id: task._id, title: task.title}]} },
       );
 
       return task;
