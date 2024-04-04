@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup.jsx';
+import NewTask from './pages/NewTask.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: '/me',
         element: <Profile />
       },
+      {
+        path: '/new-task',
+        element: <NewTask />
+      }
     ]
   }
 ])
