@@ -1,6 +1,17 @@
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 
+const styles = {
+  navbar: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    background: '#123456',
+    padding: 10,
+    color: 'white',
+    fontSize: '1.4rem',
+  },
+};
+
 function Navbar() {
   const logout = (event) => {
     event.preventDefault();
@@ -24,17 +35,17 @@ function Navbar() {
   }
   // If logged out show login controls
   return (
-    <>
-      <Link to="/">
+    <div style={styles.navbar}>
+      <Link to="/" style={{ color: '#FFF', textDecoration: 'none' }} >
         Home
       </Link>
-      <Link to="/login">
+      <Link to="/login" style={{ color: '#FFF', textDecoration: 'none' }} >
         Login
       </Link>
-      <Link to="/signup">
+      <Link to="/signup" style={{ color: '#FFF', textDecoration: 'none' }} >
         Signup
       </Link>
-    </>
+    </div>
   );
 }
 

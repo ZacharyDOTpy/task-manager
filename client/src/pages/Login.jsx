@@ -5,6 +5,15 @@ import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+const styles = {
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  }
+
 const Login = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
@@ -49,7 +58,7 @@ const Login = () => {
       )
     } 
     return (
-      <form onSubmit={handleFormSubmit}>
+      <form style={styles.form} onSubmit={handleFormSubmit}>
         <input
           placeholder="Your email"
           name="email"
