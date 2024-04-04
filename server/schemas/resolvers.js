@@ -6,7 +6,7 @@ const { find, findOne } = require('../models/Task');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate('tasks');
     },
     user: async (_, args) => {
       return User.findOne({ _id: args.id });
@@ -37,7 +37,9 @@ const resolvers = {
       console.log(task)
       await User.findOneAndUpdate(
         { _id: input.userId },
-        { $addToSet: { tasks: [{_id: task._id, title: task.title}]} },
+        // { $addToSet: { tasks: [{_id: task._id, title: task.title}]} },
+        { $addToSet: { tasks: task._id } },
+        { new: true }
       );
 
       return task;
