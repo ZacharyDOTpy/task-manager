@@ -1,6 +1,7 @@
 const { GraphQLError } = require('graphql');
 const { User, Task, TaskList } = require('../models');
 const { signToken } = require('../utils/auth');
+const { find, findOne } = require('../models/Task');
 
 const resolvers = {
   Query: {
@@ -30,9 +31,21 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addTask: (_, { input }) => {
-      const newTask = new Task(input);
-      return newTask.save();
+    addTask: async (_, { input }) => {
+      const task = await Task.create(input);
+
+      await Task.findOneAndUpdate(
+        { User: User._id },
+        { $push: { tasks: Task._id } },
+      );
+
+      return task;
+      //input.userId
+      //findoneandupdate User{
+      //  $push: {tasks: task._id}
+      //add to set
+     // }
+     //return task
     },
     updateTask: (_, { id, input }) => {
       const updatedTask = Task.findByIdAndUpdate(id, input, { new: true });

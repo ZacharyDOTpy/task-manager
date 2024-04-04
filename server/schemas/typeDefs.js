@@ -13,7 +13,9 @@ const typeDefs = `#graphql
     description: String
     status: String
     priority: String
-    user: User
+    taskAuthor: User
+    dueDate: String
+    userId: ID
   }
 
   input AddUserInput {
@@ -27,6 +29,8 @@ const typeDefs = `#graphql
     description: String!
     status: String!
     priority: String!
+    dueDate: String!
+    userId: ID!
   }
 
   input UpdateTaskInput {
@@ -34,6 +38,8 @@ const typeDefs = `#graphql
     description: String
     status: String
     priority: String
+    dueDate: String
+    userId: ID
   }
 
   type Auth {
