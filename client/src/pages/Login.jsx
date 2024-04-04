@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
@@ -6,6 +7,12 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const styles = {
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:'5px',
+  },
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -82,7 +89,7 @@ const Login = () => {
 
   return (
     <main>
-      <h4>Login</h4>
+      <h4 style={styles.title}>Login</h4>
       <div>
         {renderForm()}
         {error && <div>{error.message}</div>}
