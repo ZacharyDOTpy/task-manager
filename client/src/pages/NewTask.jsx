@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import Auth from '../utils/auth';
 import { useState } from 'react';
 
@@ -26,6 +27,8 @@ function NewTask() {
         alert('Task created!');
     }
     return (
+        <>
+
       <div>
         <form onSubmit ={handleFormSubmit}>
             <div>
@@ -71,6 +74,7 @@ function NewTask() {
             <button type="submit">Submit</button>
         </form>
       </div>
+      </>
     );
   }
   

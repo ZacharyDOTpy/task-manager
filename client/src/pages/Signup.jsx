@@ -1,10 +1,27 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
+
+const styles = {
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:'5px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  }
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -78,8 +95,8 @@ const Signup = () => {
 
   return (
     <main>
-      <h4>Sign Up</h4>
-      <div>
+      <h4 style={styles.title}>Sign Up</h4>
+      <div style={styles.form}>
         {renderForm()}
         {error && <div>{error.message}</div>}
       </div>

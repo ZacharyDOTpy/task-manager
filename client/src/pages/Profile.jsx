@@ -1,4 +1,5 @@
 // Node Modules
+import 'bootstrap/dist/css/bootstrap.css';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 // Utilities
@@ -59,6 +60,8 @@ const Profile = () => {
   }
 
   return (
+    <>
+
     <div>
       <div>
         <h2>
@@ -68,6 +71,7 @@ const Profile = () => {
         {renderUserList()}
       </div>
     </div>
+    </>
   );
 };
 

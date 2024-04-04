@@ -27,6 +27,10 @@ const router = createBrowserRouter([
         element: <Signup />
       },
       {
+        path: '/NewTask',
+        element: <NewTask />
+      },
+      {
         path: '/users/:id',
         element: <Profile />
       },
@@ -34,10 +38,6 @@ const router = createBrowserRouter([
         path: '/me',
         element: <Profile />
       },
-      {
-        path: '/new-task',
-        element: <NewTask />
-      }
     ]
   }
 ])
