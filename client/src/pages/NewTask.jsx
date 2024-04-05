@@ -30,48 +30,53 @@ function NewTask() {
         <>
 
       <div>
-        <form onSubmit ={handleFormSubmit}>
+        <form onSubmit ={handleFormSubmit} style={{ backgroundColor: '#123456', padding: '20px', borderRadius: '8px'}}>
             <div>
-                <label htmlFor="title">Title:</label>
+                <label htmlFor="title" style={{ color: 'orange'}}>Title:</label>
                 <input
                 type="text"
                 name="title"
                 onChange={handleInputChange}
+                style={{ borderColor: 'orange', borderRadius: '4px' }}
                 />
             </div>
             <div>
-                <label htmlFor="description">Description:</label>
+                <label htmlFor="description" style= {{ color: 'orange'}}>Description:</label>
                 <input
                 type="text"
                 name="description"
                 onChange={handleInputChange}
+                style={{ borderColor: 'orange', borderRadius: '4px' }}
                 />
             </div>
             <div>
-                <label htmlFor="status">Status:</label>
+                <label htmlFor="status" style={{ color: 'orange'}}>Status:</label>
                 <input
                 type="text"
                 name="status"
                 onChange={handleInputChange}
+                style={{ borderColor: 'orange', borderRadius: '4px' }}
                 />
             </div>
             <div>
-                <label htmlFor="priority">Priority:</label>
+                <label htmlFor="priority" style= {{ color: 'orange'}}>Priority:</label>
                 <input
                 type="text"
                 name="priority"
                 onChange={handleInputChange}
+                style={{ borderColor: 'orange', borderRadius: '4px' }}
                 />
             </div>
             <div>
-                <label htmlFor="dueDate">Due Date:</label>
+                <label htmlFor="dueDate" style= {{ color: 'orange'}}>Due Date:</label>
                 <input
                 type="text"
                 name="dueDate"
                 onChange={handleInputChange}
+                style={{ borderColor: 'orange', borderRadius: '4px' }}
                 />
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit" style={{ backgroundColor: 'orange', color: 'white',  borderRadius: '4px', padding: '8px 16px', border: 'none', cursor: 'pointer'}}>Submit</button>
         </form>
       </div>
       </>
