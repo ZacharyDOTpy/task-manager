@@ -50,8 +50,13 @@ const resolvers = {
      // }
      //return task
     },
-    updateTask: (_, { id, input }) => {
-      const updatedTask = Task.findByIdAndUpdate(id, input, { new: true });
+    updateTask: async (_, { id, input }) => {
+      const updatedTask = await Task.findByIdAndUpdate(
+        id, 
+        { $set: input },
+        { new: true }
+      );
+      
       return updatedTask;
     },
     login: async (_, { email, password }) => {
