@@ -2,6 +2,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Auth from '../utils/auth';
 import { useState } from 'react';
 
+const styles = {
+    form: {
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '5px',
+    },
+}
+
+
 function NewTask() {
     if (!Auth.loggedIn()) {
       window.location.assign('/login');
@@ -28,57 +37,60 @@ function NewTask() {
     }
     return (
         <>
-
-      <div>
-        <form onSubmit ={handleFormSubmit} style={{ backgroundColor: '#123456', padding: '20px', borderRadius: '8px'}}>
-            <div>
+<body style={{backgroundColor: '#123456', margin: 0, padding: 0}}>
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
+        <form onSubmit ={handleFormSubmit} style={{ backgroundColor: '#123456', padding: '20px'}}>
+            <div style={styles.form}>
                 <label htmlFor="title" style={{ color: 'orange'}}>Title:</label>
                 <input
                 type="text"
                 name="title"
                 onChange={handleInputChange}
-                style={{ borderColor: 'orange', borderRadius: '4px' }}
+                style={{ borderColor: 'orange' }}
                 />
             </div>
-            <div>
+            <div style={styles.form}>
                 <label htmlFor="description" style= {{ color: 'orange'}}>Description:</label>
                 <input
                 type="text"
                 name="description"
                 onChange={handleInputChange}
-                style={{ borderColor: 'orange', borderRadius: '4px' }}
+                style={{ borderColor: 'orange' }}
                 />
             </div>
-            <div>
+            <div style={styles.form}>
                 <label htmlFor="status" style={{ color: 'orange'}}>Status:</label>
                 <input
                 type="text"
                 name="status"
                 onChange={handleInputChange}
-                style={{ borderColor: 'orange', borderRadius: '4px' }}
+                style={{ borderColor: 'orange' }}
                 />
             </div>
-            <div>
+            <div style={styles.form}>
                 <label htmlFor="priority" style= {{ color: 'orange'}}>Priority:</label>
                 <input
                 type="text"
                 name="priority"
                 onChange={handleInputChange}
-                style={{ borderColor: 'orange', borderRadius: '4px' }}
+                style={{ borderColor: 'orange' }}
                 />
             </div>
-            <div>
+            <div style={styles.form}>
                 <label htmlFor="dueDate" style= {{ color: 'orange'}}>Due Date:</label>
                 <input
                 type="text"
                 name="dueDate"
                 onChange={handleInputChange}
-                style={{ borderColor: 'orange', borderRadius: '4px' }}
+                style={{ borderColor: 'orange' }}
                 />
             </div>
-            <button type="submit" style={{ backgroundColor: 'orange', color: 'white',  borderRadius: '4px', padding: '8px 16px', border: 'none', cursor: 'pointer'}}>Submit</button>
+            <div style={styles.form}>
+            <button type="submit" style={{ backgroundColor: 'orange', color: 'white', border: 'none', cursor: 'pointer'}}>Submit</button>
+       </div>
         </form>
       </div>
+    </body>
       </>
     );
   }
