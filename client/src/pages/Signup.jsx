@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
 
 
 import { useMutation } from '@apollo/client';
@@ -27,6 +27,13 @@ const styles = {
     background: 'linear-gradient(145deg, #ffffff, #e6e6e6)', // Add gradient for background
     padding: '20px', // Add padding for spacing
   },
+  input: {
+    marginBottom: '15px',
+    border: '1px solid #ced4da', // Add border to input fields
+    borderRadius: '5px', // Add border radius
+    padding: '10px', // Add padding
+    width: '100%', // Make input width full
+  },
 };
 
 
@@ -49,16 +56,18 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(formState)
 
     try {
       const { data } = await addUser({
-        variables: { ...formState },
+        variables: { input: { ...formState } },
       });
-
+      console.log('data', data)
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
+
   };
 
   const renderForm = () => {
@@ -71,31 +80,59 @@ const Signup = () => {
       )
     }
     return (
-      <form onSubmit={handleFormSubmit}>
-        <input
-          placeholder="Your username"
-          name="username"
-          type="text"
-          value={formState.name}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="Your email"
-          name="email"
-          type="email"
-          value={formState.email}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="******"
-          name="password"
-          type="password"
-          value={formState.password}
-          onChange={handleChange}
-        />
-        <button type="submit">
-          Submit
-        </button>
+
+      <form onSubmit={handleFormSubmit} style={styles.form}>
+        <div className="form-group">
+          <label htmlFor="inputUsername">Username</label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputUsername"
+            aria-describedby="usernameHelp"
+            placeholder="Enter username"
+            name="username"
+            value={formState.username}
+            onChange={handleChange} style={{ border: '1px solid #ced4da', borderRadius: '5px', padding: '10px', width: '100%' }}
+          />
+          <small id="usernameHelp" className="form-text text-muted">some words here.</small>
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            name="email"
+            value={formState.email}
+            onChange={handleChange} style={{ border: '1px solid #ced4da', borderRadius: '5px', padding: '10px', width: '100%' }}
+          />
+          <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+            name="password"
+            value={formState.password}
+            onChange={handleChange}
+            style={{ border: '1px solid #ced4da', borderRadius: '5px', padding: '10px', width: '100%' }}
+          />
+        </div>
+        <br />
+        {/* <div className="form-group form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="exampleCheck1"
+          />
+          <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+        </div> */}
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     );
   };
