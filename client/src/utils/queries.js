@@ -29,3 +29,31 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_TASKS = gql`
+  query tasks {
+    tasks {
+      _id
+      name
+      description
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const QUERY_TASK = gql`
+  query task($id: ID!) {
+    task(id: $id) {
+      _id
+      name
+      description
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;  
