@@ -1,6 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import Auth from '../utils/auth';
 import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+
+import { QUERY_TASKS } from '../utils/queries';
+import { ADD_TASK } from '../utils/mutations';
 
 const styles = {
     form: {
@@ -21,8 +25,8 @@ function NewTask() {
         status: '',
         priority: '',
         dueDate: '',
-        userId: Auth.getProfile().data._id
     });
+    const[addTask, {error, data}] = useMutation(ADD_TASK);
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setTaskData({
@@ -32,9 +36,19 @@ function NewTask() {
     };
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(taskData);
-        alert('Task created!');
+        try {
+            const { data } = await addTask({
+                variables: taskData
+            });
+
+            console.log(data);
+            alert('Task created!');
+        }
+        catch (e) {
+            console.error(e);
+        }
     }
+    
     return (
         <>
 <body style={{backgroundColor: '#123456', margin: 0, padding: 0}}>

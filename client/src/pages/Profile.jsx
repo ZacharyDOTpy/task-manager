@@ -21,7 +21,7 @@ const Profile = () => {
 
   const user = data?.me || data?.user || {};
   const users = usersData?.users || [];
-
+console.log(user)
   if (error) console.log(error);
 
   // redirect to personal profile page if username is yours
@@ -59,6 +59,8 @@ const Profile = () => {
     );
   }
 
+  console.log(user);
+
   return (
     <>
 
@@ -68,6 +70,15 @@ const Profile = () => {
           Viewing {id ? `${user.username}'s` : 'your'} profile.
         </h2>
         {renderCurrentUserInfo()}
+        <h3>{user.username}'s tasks:</h3>
+        {user.tasks && user.tasks.length ? (
+          user.tasks.map((task) => (
+            <div key={task._id}>
+              <h4>{task.title}</h4>
+              <p>{task.description}</p>
+            </div>
+          ))
+          ) : null}
         {renderUserList()}
       </div>
     </div>

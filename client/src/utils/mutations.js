@@ -25,11 +25,27 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TASK = gql`
-  mutation addTask($name: String!, $description: String!) {
-    addTask(name: $name, description: $description) {
+  mutation addTask(
+    $title: String!, 
+    $description: String!, 
+    $status: String!, 
+    $priority: String!, 
+    $dueDate: String
+  ) {
+    addTask(
+      title: $title, 
+      description: $description, 
+      status: $status, 
+      priority: $priority,
+      dueDate: $dueDate
+    ) {
       _id
-      name
-      description
+      username
+      email
+      tasks {
+        _id
+        title
+      }
     }
   }
 `;

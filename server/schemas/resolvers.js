@@ -9,19 +9,19 @@ const resolvers = {
       return User.find().populate("tasks");
     },
     user: async (_, args) => {
-      return User.findOne({ _id: args.id });
+      return User.findOne({ _id: args.id }).populate("tasks");
     },
     me: async (_, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate("tasks");
       }
       throw new GraphQLError("You need to be logged in!");
     },
-    tasks: async () => {
-      return Task.find();
-    },
     task: async (_, { id }) => {
       return Task.findById(id);
+    },
+    tasks: async () => {
+      return Task.find();
     },
   },
 
@@ -32,18 +32,21 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addTask: async (_, { input }) => {
-      const task = await Task.create(input);
-      console.log(task._id);
-      console.log(task);
-      await User.findOneAndUpdate(
-        { _id: input.userId },
-        // { $addToSet: { tasks: [{_id: task._id, title: task.title}]} },
-        { $addToSet: { tasks: task._id } },
-        { new: true }
-      );
+    addTask: async (_, args, context) => {
+      const task = await Task.create(args);
 
-      return task;
+      if (context.user) {
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          // { $addToSet: { tasks: [{_id: task._id, title: task.title}]} },
+          { $addToSet: { tasks: task._id } },
+          { new: true }
+        ).populate("tasks");
+        return user;
+      }
+
+      return new GraphQLError("You are not authorized to perform this action.");
+
       //input.userId
       //findoneandupdate User{
       //  $push: {tasks: task._id}
