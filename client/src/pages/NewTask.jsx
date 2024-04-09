@@ -1,6 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import React, { useState } from 'react';
 import Auth from '../utils/auth';
-import { useState } from 'react';
 
 const styles = {
     form: {
@@ -8,91 +7,127 @@ const styles = {
         justifyContent: 'center',
         padding: '5px',
     },
-}
-
+    modalBackdrop: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 9999,
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        padding: '20px',
+        borderRadius: '5px',
+    },
+};
 
 function NewTask() {
-    if (!Auth.loggedIn()) {
-      window.location.assign('/login');
-    }
-    const[taskData, setTaskData] = useState({
+    const [showModal, setShowModal] = useState(false);
+    const [taskData, setTaskData] = useState({
         title: '',
         description: '',
         status: '',
         priority: '',
         dueDate: '',
-        userId: Auth.getProfile().data._id
+        userId: Auth.getProfile().data._id,
     });
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setTaskData({
             ...taskData,
-            [name]: value
+            [name]: value,
         });
     };
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(taskData);
-        alert('Task created!');
-    }
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <>
-<body style={{backgroundColor: '#123456', margin: 0, padding: 0}}>
-      <div style={{ display: 'flex', justifyContent: 'center'}}>
-        <form onSubmit ={handleFormSubmit} style={{ backgroundColor: '#123456', padding: '20px'}}>
-            <div style={styles.form}>
-                <label htmlFor="title" style={{ color: 'orange'}}>Title:</label>
-                <input
-                type="text"
-                name="title"
-                onChange={handleInputChange}
-                style={{ borderColor: 'orange' }}
-                />
-            </div>
-            <div style={styles.form}>
-                <label htmlFor="description" style= {{ color: 'orange'}}>Description:</label>
-                <input
-                type="text"
-                name="description"
-                onChange={handleInputChange}
-                style={{ borderColor: 'orange' }}
-                />
-            </div>
-            <div style={styles.form}>
-                <label htmlFor="status" style={{ color: 'orange'}}>Status:</label>
-                <input
-                type="text"
-                name="status"
-                onChange={handleInputChange}
-                style={{ borderColor: 'orange' }}
-                />
-            </div>
-            <div style={styles.form}>
-                <label htmlFor="priority" style= {{ color: 'orange'}}>Priority:</label>
-                <input
-                type="text"
-                name="priority"
-                onChange={handleInputChange}
-                style={{ borderColor: 'orange' }}
-                />
-            </div>
-            <div style={styles.form}>
-                <label htmlFor="dueDate" style= {{ color: 'orange'}}>Due Date:</label>
-                <input
-                type="text"
-                name="dueDate"
-                onChange={handleInputChange}
-                style={{ borderColor: 'orange' }}
-                />
-            </div>
-            <div style={styles.form}>
-            <button type="submit" style={{ backgroundColor: 'orange', color: 'white', border: 'none', cursor: 'pointer'}}>Submit</button>
-       </div>
-        </form>
-      </div>
-    </body>
-      </>
+            <body style={{ backgroundColor: '#123456', margin: 0, padding: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <form onSubmit={handleFormSubmit} style={{ backgroundColor: '#123456', padding: '20px' }}>
+                        <div style={styles.form}>
+                            <label htmlFor="title" style={{ color: 'orange' }}>Title:</label>
+                            <input
+                                type="text"
+                                name="title"
+                                onChange={handleInputChange}
+                                style={{ borderColor: 'orange' }}
+                            />
+                        </div>
+                        <div style={styles.form}>
+                            <label htmlFor="description" style={{ color: 'orange' }}>Description:</label>
+                            <input
+                                type="text"
+                                name="description"
+                                onChange={handleInputChange}
+                                style={{ borderColor: 'orange' }}
+                            />
+                        </div>
+                        <div style={styles.form}>
+                            <label htmlFor="status" style={{ color: 'orange' }}>Status:</label>
+                            <select
+                                name="status"
+                                value={taskData.status}
+                                onChange={handleInputChange}
+                                style={{ borderColor: 'orange' }}
+                            >
+                                <option value="To Do">To Do</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div style={styles.form}>
+                            <label htmlFor="priority" style={{ color: 'orange' }}>Priority:</label>
+                            <input
+                                type="text"
+                                name="priority"
+                                onChange={handleInputChange}
+                                style={{ borderColor: 'orange' }}
+                            />
+                        </div>
+                        <div style={styles.form}>
+                            <label htmlFor="dueDate" style={{ color: 'orange' }}>Due Date:</label>
+                            <input
+                                type="text"
+                                name="dueDate"
+                                onChange={handleInputChange}
+                                style={{ borderColor: 'orange' }}
+                            />
+                        </div>
+                        <div style={styles.form}>
+                            <button type="submit" style={{ backgroundColor: 'orange', color: 'white', border: 'none', cursor: 'pointer' }}>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </body>
+
+            {/* Modal */}
+            {showModal && (
+                <div style={styles.modalBackdrop}>
+                    <div style={styles.modalContent}>
+                        <h2>Task Created</h2>
+                        <p>Task created successfully!</p>
+                        <button onClick={closeModal}>Close</button>
+                    </div>
+                </div>
+            )}
+        </>
     );
-  }
-  
-  export default NewTask;
+}
+
+export default NewTask;
