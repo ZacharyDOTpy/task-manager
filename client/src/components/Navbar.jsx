@@ -62,9 +62,6 @@ function Navbar() {
       <Link to="/signup" style={{ color: '#FFF', textDecoration: 'none' }} >
         Signup
       </Link>
-      <Link to="/NewTask" style={{ color: '#FFF', textDecoration: 'none' }} >
-        New Task
-      </Link>
     </div>
   );
 }
