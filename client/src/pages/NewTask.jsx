@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import Auth from '../utils/auth';
 
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+
+import { QUERY_TASKS } from '../utils/queries';
+import { ADD_TASK } from '../utils/mutations';
+
 const styles = {
     form: {
         display: 'flex',
@@ -34,8 +40,13 @@ function NewTask() {
         status: '',
         priority: '',
         dueDate: '',
+
+    });
+    const[addTask, {error, data}] = useMutation(ADD_TASK);
+
         userId: Auth.getProfile().data._id,
     });
+
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -47,6 +58,21 @@ function NewTask() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        try {
+            const { data } = await addTask({
+                variables: taskData
+            });
+
+            console.log(data);
+            alert('Task created!');
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+    
+
         console.log(taskData);
         setShowModal(true);
     };
@@ -54,6 +80,7 @@ function NewTask() {
     const closeModal = () => {
         setShowModal(false);
     };
+
 
     return (
         <>

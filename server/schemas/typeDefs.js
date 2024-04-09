@@ -50,14 +50,21 @@ const typeDefs = `#graphql
   type Query {
     users: [User]
     user(id: ID!): User
-    tasks: [Task]
     task(id: ID!): Task
     me: User
+    tasks: [Task]
+
   }
 
   type Mutation {
     addUser(input: AddUserInput!): Auth
-    addTask(input: AddTaskInput!): Task
+    addTask(
+      title: String!, 
+      description: String!, 
+      status: String!, 
+      priority:String!, 
+      dueDate: String
+    ): User
     updateTask(id: ID!, input: UpdateTaskInput!): Task
     login(email: String!, password: String!): Auth
     }

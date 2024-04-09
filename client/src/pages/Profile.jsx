@@ -85,7 +85,7 @@ const styles = {
       </ul>
     );
   }
-  
+
   return (
     <>
   
@@ -96,8 +96,20 @@ const styles = {
         </h2>
         <div style={styles.header2}>
         {renderCurrentUserInfo()}
+
+        <h3>{user.username}'s tasks:</h3>
+        {user.tasks && user.tasks.length ? (
+          user.tasks.map((task) => (
+            <div key={task._id}>
+              <h4>{task.title}</h4>
+              <p>{task.description}</p>
+            </div>
+          ))
+          ) : null}
+
         </div>
         <div style={styles.info}>
+
         {renderUserList()}
         </div>
       </div>
