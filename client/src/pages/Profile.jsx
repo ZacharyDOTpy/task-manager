@@ -24,7 +24,7 @@ const styles = {
   info: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    alignItems: 'center',
     padding: 5,
     fontSize: '1.6rem',
     fontWeight: '200',
@@ -36,6 +36,44 @@ const styles = {
     fontSize: '2.0rem',
     fontWeight: '300',
   },
+  taskDiv: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: 5,
+    fontSize: '1.6rem',
+    fontWeight: '200',
+  },
+  userListDiv: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    padding: 5,
+    fontSize: '1.6rem',
+    fontWeight: '200',
+  },
+  taskTitle: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: 5,
+    padding: 5,
+    fontSize: '2.0rem',
+    fontWeight: '600',
+    background: 'orange',
+    color: 'white',
+    width: '800px',
+  },
+  taskDescription: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: 5,
+    padding: 5,
+    fontSize: '1.6rem',
+    fontWeight: '200',
+    background: 'white',
+  },
+
+  
   }
   
   // Get current user
@@ -94,25 +132,27 @@ const styles = {
         <h2 style={styles.header} >
           Viewing {id ? `${user.username}'s` : 'your'} profile.
         </h2>
-        <div style={styles.header2}>
+        <div  style={styles.info} >
         {renderCurrentUserInfo()}
 
         <h3>{user.username}'s tasks:</h3>
         {user.tasks && user.tasks.length ? (
           user.tasks.map((task) => (
-            <div key={task._id}>
-              <h4>{task.title}</h4>
-              <p>{task.description}</p>
+            <div style={styles.taskDiv} key={task._id}>
+              <h4 style={styles.taskTitle}>{task.title}</h4>
+              <p style={styles.taskDescription}>{task.description}</p>
             </div>
           ))
-          ) : null}
+        ) : null}
 
         </div>
         <div style={styles.info}>
 
-        {renderUserList()}
         </div>
       </div>
+        <div style={styles.userListDiv}>
+        {renderUserList()}
+        </div>
     </div>
     </>
   );
