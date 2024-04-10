@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Auth from '../utils/auth';
 
-import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { QUERY_TASKS } from '../utils/queries';
@@ -37,15 +36,15 @@ function NewTask() {
     const [taskData, setTaskData] = useState({
         title: '',
         description: '',
-        status: '',
+        status: 'To Do',
         priority: '',
         dueDate: '',
 
     });
     const[addTask, {error, data}] = useMutation(ADD_TASK);
 
-        userId: Auth.getProfile().data._id,
-    });
+    //     userId: Auth.getProfile().data._id,
+    // };
 
 
     const handleInputChange = (event) => {
@@ -65,12 +64,11 @@ function NewTask() {
             });
 
             console.log(data);
-            alert('Task created!');
         }
         catch (e) {
             console.error(e);
         }
-    }
+    
     
 
         console.log(taskData);
