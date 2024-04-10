@@ -23,6 +23,7 @@ export const QUERY_USER = gql`
       tasks {
         _id
         title
+        description
       }
     }
   }
@@ -37,6 +38,7 @@ export const QUERY_ME = gql`
       tasks {
         _id
         title
+        description
       }
     }
   }
