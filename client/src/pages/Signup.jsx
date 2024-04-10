@@ -14,7 +14,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '5px',
-    color: 'blue',
+    color: 'orange',
     textShadow: '2px 2px 2px rgba(0, 0, 0, 0.5)', // Add a slight text shadow for depth
   },
   form: {
