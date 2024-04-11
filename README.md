@@ -41,4 +41,10 @@ This project is licensed under the terms of the [MIT License](https://opensource
 
 ## ScreenShots
 
+![TODO](./Screenshot%202024-04-10%20at%206.53.50 PM.png)
+![TODO](./Screenshot%202024-04-10%20at%206.54.57 PM.png)
+
 ## Links
+
+(https://blooming-reef-96774-6ce2b8dd6923.herokuapp.com/)
+(https://github.com/ZacharyDOTpy/task-manager)
